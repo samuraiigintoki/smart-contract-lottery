@@ -8,25 +8,24 @@ import {HelperConfig} from "../script/HelperConfig.s.sol";
 import {CreateSubscription, FundSubscription, AddConsumer} from "script/Interactions.s.sol";
 
 contract DeployRaffle is Script {
-    function run () public {
+    function run() public {
         deployContract();
     }
 
-    function deployContract() public returns(Raffle, HelperConfig) {
+    function deployContract() public returns (Raffle, HelperConfig) {
         HelperConfig helperConfig = new HelperConfig();
         // local => deploy mocks => get local config
         // sepolia => get sepolia config
         HelperConfig.NetworkConfig memory config = helperConfig.getConfig();
 
-        if(config.subscriptionId == 0) {
+        if (config.subscriptionId == 0) {
             CreateSubscription createSubscription = new CreateSubscription();
-            (config.subscriptionId, config.vrfCoordinator) = createSubscription.createSubscription(config.vrfCoordinator);
+            (config.subscriptionId, config.vrfCoordinator) =
+                createSubscription.createSubscription(config.vrfCoordinator);
 
             //FUnding it
             FundSubscription fundSubscription = new FundSubscription();
             fundSubscription.fundSubscription(config.vrfCoordinator, config.subscriptionId, config.link);
-            
-
         }
 
         vm.startBroadcast();
