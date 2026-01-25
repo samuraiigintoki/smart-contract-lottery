@@ -119,16 +119,16 @@ contract Raffle is VRFConsumerBaseV2Plus {
      */
     function checkUpkeep(
         bytes memory /**
-         * checkData
-         */
+                      * checkData
+                      */
     )
         public
         view
         returns (
             bool upkeepNeeded,
             bytes memory /**
-             * checkData
-             */
+                          * checkData
+                          */
         )
     {
         bool timesHasPassed = (block.timestamp - s_lastTimeStamp) >= i_interval;
@@ -142,8 +142,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
     function performUpkeep(
         bytes calldata /**
-         * performData
-         */
+                        * performData
+                        */
     )
         public
     {
