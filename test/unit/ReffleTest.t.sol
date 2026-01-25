@@ -163,4 +163,7 @@ contract RaffleTest is Test {
 
         assert(!upkeepNeeded);
     }
+
+
+    function test() public {}
 }
